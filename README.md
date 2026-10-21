@@ -1,25 +1,41 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 碳排核算项目资料
 
-# Run and deploy your AI Studio app
+整理日期：2026-10-21（北京时间）。目标仓库：Leonard-no2/--2。
 
-This contains everything you need to run your app locally.
+本目录归档截图选定的四段研究聊天、相关文稿、来源材料、运行台账、清洗数据和当前模型。自写论文按最新版本保留；参考文献全文作为研究来源保留。当前同步说明见 [上传状态](UPLOAD_STATUS.md)。
 
-View your app in AI Studio: https://ai.studio/apps/drive/1DvZCwycC5-Peg7cHpf2t_acWiNBmTJYP
+## 从这里开始
 
-## Run Locally
+- [研究进展与后续注意事项](summaries/研究进展与后续注意事项.md)
+- [四段对话总结](summaries/四段对话总结.md)
+- [版本选择说明](documents/版本选择说明.md)
+- [全部文件及SHA-256校验值](catalog/files.csv)
+- [来源链接清单](references/对话与文稿来源链接.csv)
 
-**Prerequisites:**  Node.js
+## 资料目录
 
+| 目录 | 内容 |
+| --- | --- |
+| documents | 最新小论文、开题报告、综述、答辩PPT、补充Word及Excel |
+| conversations | 四段对话正文、可获取的图片附件、结构化归档 |
+| data/raw | 城北与江边月报、化验、电耗、设计资料 |
+| data/processed | 清洗及派生数据；保留来源与精度说明 |
+| models/current | 20261017去除率模型、脚本、模型文件与结果 |
+| analysis | 补充分析、图表和情景数据 |
+| references | 文献全文、标准、公开数据补充、文献索引 |
+| templates | 运行台账空白表格等模板资料 |
+| catalog | 文件清单、重复项、旧文稿排除记录、历史文件引用路径 |
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 当前文稿
 
+主论文：[mj1017-小论文.docx](documents/论文/mj1017-小论文.docx)。
 
-## 碳排核算研究资料
+补充材料使用20261017无底色版；答辩PPT使用20261020最后修订v3的内容并统一文件名。原文稿原样复制，没有改写正文或重新训练模型。
 
-[查看对话总结、最新论文、数据、模型与来源材料](research/碳排核算/README.md)（整理于2026-10-21）。
+## 使用范围与记录
+
+历史聊天中的五分项、双厂模型、早期情景结果可能已被后续讨论取代。当前结果以 `models/current/results_rate_only/RE/test_metrics.csv`、`models/current/scenario_summary.csv` 和当前论文为依据。数据清洗全精度表与论文展示用四舍五入表分别保留。
+
+聊天归档不包含隐藏推理或工具执行日志。ChatGPT历史消息中没有提供图像内容的附件、已经失效的sandbox下载链接，不能凭文字重新生成；详见归档覆盖说明。
+
+本地 `sources/` 和D盘原文件均未修改。相同内容按SHA-256去重，重复来源对应关系见 `catalog/duplicates.csv`。旧论文只在排除清单中登记，未放入本次文稿目录。上传资料不自动授予第三方文献或原始台账新的使用许可。
