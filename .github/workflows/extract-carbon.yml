@@ -1,0 +1,24 @@
+name: Extract carbon accounting directory
+on:
+  push:
+    paths:
+      - .github/workflows/extract-carbon.yml
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Promote verified research tree to repository root
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          carbon_tree=$(gh api "repos/$GH_REPO/git/trees/$HEAD_SHA?recursive=1" --jq '.tree[] | select(.path == "research/碳排核算" and .type == "tree") | .sha')
+          test "$carbon_tree" = "1077e15cdc5f4ce83c8842419b28e9956216c95b"
+          current_head=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
+          test "$current_head" = "$HEAD_SHA"
+          new_commit=$(jq -n --arg tree "$carbon_tree" --arg parent "$HEAD_SHA" '{message:"Extract carbon accounting research into standalone repository root",tree:$tree,parents:[$parent]}' | gh api "repos/$GH_REPO/git/commits" --input - --jq .sha)
+          gh api --method PATCH "repos/$GH_REPO/git/refs/heads/main" -f sha="$new_commit" -F force=false
